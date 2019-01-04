@@ -12,8 +12,8 @@ from .models import dong_data
 # 인덱스 화면을 띄우는 함수
 def index(request):
     print("---------index()-------------")
-
     return render(request, 'country/index.html')
+
 
 def detail(request):
     print("---------detail()-------------")
@@ -34,11 +34,12 @@ def detail(request):
     return render(request, 'country/detail.html', context)
 
 
-
 def result(request):
     print("---------result()-------------")
 
     return render(request, 'country/result.html')
+
+
 
 # 인덱스 화면에서 값 입력 받고 시별로 정렬 한 후 디테일로 넘기는 함수(세션 유지)
 
