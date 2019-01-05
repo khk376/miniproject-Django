@@ -1,20 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
+{% load static %}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
-    <title>간단한 지도 표시하기</title>
+    <title>강원도 행정구역 지도</title>
     <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=oju9hhvfqh"></script>
+    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=oju9hhvfqh&submodules=geocoder"></script>
+    <div id="map" style="margin:0 auto; width:80%;height:650px;"></div>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="http://d3js.org/topojson.v1.min.js"></script>
+
 </head>
 <body>
-<div id="map" style="margin:0 auto; width:80%;height:500px;"></div>
 
 <script>
+
+var HOME_PATH = window.HOME_PATH || '.';
+var position = new naver.maps.LatLng(37.9082504, 127.7247803);
+
 var map = new naver.maps.Map('map', {
-    center: new naver.maps.LatLng(37.9082504, 127.7247803),
-    zoom: 3
-});
+        center: position,
+        zoom: 3
+    });
+infowindow = null;
 
 var chooncheon = new naver.maps.Polygon({
     map: map,
@@ -89,11 +101,11 @@ var chooncheon = new naver.maps.Polygon({
                 new naver.maps.LatLng(38.04815092000516, 127.90579626302805),
              
         ]
-        
+
     ],
     clickable: true,
     fillColor: '#FA58D0',
-    fillOpacity: 0,
+    fillOpacity: 0.5,
     strokeColor: '#FA58D0',
     strokeOpacity: 0,
     strokeWeight: 3
@@ -148,7 +160,7 @@ new naver.maps.LatLng(38.15831275424904, 128.61133667019794),
     ],
     clickable: true,
     fillColor: '#FA58D0',
-    fillOpacity: 0,
+    fillOpacity: 0.5,
 
 });
 
@@ -205,7 +217,7 @@ var gosung = new naver.maps.Polygon({
     ],
     clickable: true,
     fillColor: '#FA58D0',
-    fillOpacity: 0,
+    fillOpacity: 0.5,
 
 });
 
@@ -294,7 +306,7 @@ new naver.maps.LatLng(38.338006015888745, 128.12544185956497),
     ],
     clickable: true,
     fillColor: '#FA58D0',
-    fillOpacity: 0,
+    fillOpacity: 0.5,
 
 });
 
@@ -350,7 +362,7 @@ var yanggoo = new naver.maps.Polygon({
     ],
     clickable: true,
     fillColor: '#FA58D0',
-    fillOpacity: 0,
+    fillOpacity: 0.5,
 
 });
 
@@ -421,7 +433,7 @@ new naver.maps.LatLng(38.337763566064, 127.61231986933076),
     ],
     clickable: true,
     fillColor: '#FA58D0',
-    fillOpacity: 0,
+    fillOpacity: 0.5,
 
 });
 
@@ -487,7 +499,7 @@ new naver.maps.LatLng(38.289324698353205, 127.1114029794941),
     ],
     clickable: true,
     fillColor: '#FA58D0',
-    fillOpacity: 0,
+    fillOpacity: 0.5,
 
 });
 
@@ -566,7 +578,7 @@ new naver.maps.LatLng(37.53115593732261, 128.97541711260882),
     ],
     clickable: true,
     fillColor: '#FA58D0',
-    fillOpacity: 0,
+    fillOpacity: 0.5,
 
 });
 
@@ -753,7 +765,7 @@ new naver.maps.LatLng(37.405167529128924, 128.2678514699623),
     ],
     clickable: true,
     fillColor: '#FA58D0',
-    fillOpacity: 0,
+    fillOpacity: 0.5,
 
 });
 
@@ -828,7 +840,7 @@ new naver.maps.LatLng(37.62666351063648, 128.25699068284163),
     ],
     clickable: true,
     fillColor: '#FA58D0',
-    fillOpacity: 0,
+    fillOpacity: 0.5,
 });
 
 
@@ -1018,7 +1030,7 @@ new naver.maps.LatLng(37.143500012556274, 129.36640532794073),
     ],
     clickable: true,
     fillColor: '#FA58D0',
-    fillOpacity: 0,
+    fillOpacity: 0.5,
 
 });
 
@@ -1052,7 +1064,7 @@ new naver.maps.LatLng(38.199601060345735, 128.44411061547473),
     ],
     clickable: true,
     fillColor: '#FA58D0',
-    fillOpacity: 0,
+    fillOpacity: 0.5,
 
 });
 
@@ -1103,7 +1115,7 @@ new naver.maps.LatLng(37.09759661766801, 129.09808079870996),
     ],
     clickable: true,
     fillColor: '#FA58D0',
-    fillOpacity: 0,
+    fillOpacity: 0.5,
 
 });
 
@@ -1139,7 +1151,7 @@ new naver.maps.LatLng(37.60326071209432, 129.07533176628823),
     ],
     clickable: true,
     fillColor: '#FA58D0',
-    fillOpacity: 0,
+    fillOpacity: 0.5,
 
 });
 
@@ -1208,7 +1220,7 @@ new naver.maps.LatLng(37.60326071209432, 129.07533176628823),
     ],
     clickable: true,
     fillColor: '#FA58D0',
-    fillOpacity: 0,
+    fillOpacity: 0.5,
 
 });
 
@@ -1279,11 +1291,77 @@ var wonju = new naver.maps.Polygon({
     ],
     clickable: true,
     fillColor: '#FA58D0',
-    fillOpacity: 0,
+    fillOpacity: 0.5,
+});
+        ///////////////////////////////////////////////////////////////////////////
+        ////////////////////////클릭속성///////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////
+        
+
+function addMarker(z, y, x) 
+{
+    var position = new naver.maps.LatLng(y, x);
+    var markerOptions = // new naver.maps.Marker(
+    {
+        position: position.destinationPoint(90, 15),
+        map: map
+    };
+    
+    var marker = new naver.maps.Marker(markerOptions);
+
+    var contentString = [
+        '<div class="iw_inner">',
+        '   <h3>'+z+'</h3>',
+        '   <p>동읍면: <br />',
+        '   <p>병원 수: <br />',
+        '   <p>학교 수: <br />',
+        '   <p>평당 가격(십만 원): <br />',
+        '       <a href="http://www.naver.com" target="_blank">www.naver.com/</a>',
+        '   </p>',
+        '</div>'
+    ].join('');
+
+    var infowindow = new naver.maps.InfoWindow({
+        content: contentString,
+        maxWidth: 140,
+        backgroundColor: "white",
+        borderColor: "#2db400",
+        borderWidth: 5,
+        anchorSize: new naver.maps.Size(30, 30),
+        anchorSkew: true,
+        anchorColor: "#eee",
+        pixelOffset: new naver.maps.Point(20, -20)
+    });
+
+    naver.maps.Event.addListener(marker, "click", function(e) {
+        //rect.setBounds(bounds);
+        if (infowindow.getMap()) {
+            infowindow.close();
+        } else {
+            infowindow.open(map, marker);
+        }
+    });
+
+    marker.setMap(map);
+}
+
+
+d3.csv("/static/gangwon.csv", function(data){
+   console.log(data[0]);
+    csvmake(data);
+    console.log(data);
 });
 
+function csvmake(data){
+    for (var i=0, ii=data.length; i<ii; i++) {
+        addMarker(data[i].name,data[i].yi,data[i].ky);
+    }
+}
 
 
+
+
+/*
 
     naver.maps.Event.addListener(pyungchang, "mouseover", function(e) {
         map.setCursor("pointer");
@@ -1291,6 +1369,7 @@ var wonju = new naver.maps.Polygon({
         pyungchang.setOptions({
             fillOpacity: 0.3
         });
+        
     });
 
     naver.maps.Event.addListener(pyungchang, "mouseout", function(e) {
@@ -1300,8 +1379,10 @@ var wonju = new naver.maps.Polygon({
             fillOpacity: 0.4
         });
     });
-var map = new naver.maps.Map('map', mapOptions);
+*/
+
 </script>
+
 </body>
 </html>
 
